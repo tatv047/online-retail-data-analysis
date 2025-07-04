@@ -131,11 +131,115 @@ On looking at the data w.r.t. date-time,we observed that:
 
 ## Customer Segmentation
 
+<p align="center">
+  <img src="./docs/img8.png" alt="Image 1" />
+</p>
+
+**Customer Segmentation** is the process of division of customer base into several groups of individuals that share a similarity in different ways that are relevant to marketing such as gender, age, interests, and miscellaneous spending habits. <br>
+
+There are four major types of segmentation bases are as follows:
+
+1. **Demographic:** Quantifiable characteristics of the market. Examples include age, gender, income, education, social and economic status, and more.
+2. **Geographic:** Division of the market according to geographic attributes. Examples include country, region, size of population, and more.
+3. **Psychographic:** Incorporation of customer measures such as attitudes, beliefs, or personality attributes. For example, customer attitudes toward a certain statement are typically used to infer their perspectives on particular beliefs that are important to a brand.
+4. **Behavioral:** Historical usage, which can be a good indicator of future actions. Examples include usage frequency, level of user engagement, the tendency to retain the product or service, and so on.
+
+Behavioral segmentation has received particularly high attention in industry due to its special focus on historical usage patterns and usage habits. One of the most frequently applied behavioral segmentation approaches is the **Recency, Frequency, Monetary (RFM) model**,and we will use that only. <br>
+The building blocks of RFM are as follows:
+
+- **Recency**, which measures how recently the customer used the product or service.
+- **Frequency**, which tells how frequently the customer used it.
+- **Monetary**, which is related to how much monetary value was invested toward it.
+
+
+
+# Preparing Data
+
+<p align="center">
+  <img src="./docs/img10.png" alt="Image 1" width="85%" />
+</p>
+<p align="center">
+  <img src="./docs/img11.png" alt="Image 1" width="85%"/>
+</p>
+
+
+- We saw in the EDA that there were quite a lot of outliers in "UnitPrice" and "Quantity", which in turn gets reflected in RFM model as above.
+- To deal with this we create two dataset: **outliers** and **non-outliers**. The threshold is chosen as the *max* and *min* of the boxplot for the original dataset.
+- **non-outliers** are clustered using K-means while for **outliers** we make custom clusters.
+<br>
+
+<p align="center">
+  <figure style="text-align: center;">
+    <img src="./docs/img12.png" alt="Image 1">
+    <figcaption><em> Distribution of RFM for  non-outliers</em></figcaption>
+  </figure>
+</p>
+
+- Then we move on to creating **RFM** datapoints for each entry in non-outliers dataset. 
+- K-means uses Euclidean distance to assign points to the nearest cluster center. If your features have different units or scales, the feature with the larger scale will dominate the distance calculations. So we will need to **scale** the data too.
+<p align="center">
+  <img src="./docs/img13.png" alt="Image 1" width="45%"/>
+  <img src="./docs/img14.png" alt="Image 1" width="45%"/>
+</p>
+
+*This data is now prepared to be used in K-Means clustering algorithm.*
+
+### What is K-Means Algorithm ?
+
+- While using the **k-means clustering** algorithm, the first step is to indicate the number of clusters ($k$) that we wish to produce in the final output.
+- The algorithm starts by selecting $k$ objects from dataset randomly that will serve as the initial centers for our clusters. These selected objects are the cluster means, also known as *centroids*. 
+- Then, the remaining objects have an assignment of the closest centroid. This centroid is defined by the Euclidean Distance present between the object and the cluster mean. We refer to this step as “*cluster assignment*”.
+- When the assignment is complete, the algorithm proceeds to calculate new mean value of each cluster present in the data. 
+- After the recalculation of the centers, the observations are checked if they are closer to a different cluster. Using the updated cluster mean, the objects undergo reassignment. 
+- This goes on repeatedly through several iterations until the cluster assignments stop altering. The clusters that are present in the current iteration are the same as the ones obtained in the previous iteration. 
+
+
+### Determining Optimal Clusters
+
+When working with clustering algorithms like KMeans, it's important to determine the optimal number of clusters ($k$) to achieve meaningful groupings. We will use the following two methods:
+
+- **Elbow Method:** This method uses the *inertia*, which is the sum of squared distances between each point and its nearest cluster center. As $k$ increases, inertia decreases. The optimal k is often identified at the "*elbow point*"—where the rate of decrease sharply slows down, indicating diminishing returns with additional clusters.
+
+- **Average Silhouette Method:** The silhouette score measures how well each point fits within its cluster compared to others. It ranges from -1 to 1, where a higher score indicates better-defined and more separated clusters. The average silhouette method calculates the mean silhouette score for different values of $k$. The optimal number of clusters is the one that maximizes the average silhouette score, indicating the best balance between cohesion and separation.
+
+<p align="center">
+  <img src="./docs/img15.png" alt="Image 1" />
+</p>
+
+From the output above, $k=4$ looks like a good trade-off. <br>
+Having determined the number of clusters, we apply K-means to create the customer segments. Because the goal is to identify the group of users with high engagement, we assign a label (or name) to each segment. <br>
+
+We get the cluster labels for each datapoint in the non-outliers dataset,and then assign it. The visualisation is as follows:
+
+<p align="center">
+  <img src="./docs/img18.png" alt="Image 1" width = "49%" />
+  <img src="./docs/img19.png" alt="Image 1" width = "49%" />
+</p>
+<p align="center">
+  <img src="./docs/img20.png" alt="Image 1" width="50%" >
+</p>
+
+Based on this we perform the cluster analysis for non-outliers datapoints and get the following segments:
+- **Cluster 0 (Red): 'Retain'**
+    1. Rationale: This cluster represents high-value customers who purchase regularly, though not always recently. The focus should be retention efforts to maintain their loyalty and spending levels.
+    2. Action: Implement loyalty programs,personalised offers,and regular engagement to ensure they remain active.
+
+- **Cluster 1 (Orange): 'Re-enagage'**
+    1. Rationale: This cluster represents low-value and infrequent customers who haven't purchased recently. The focus should be on re-engagement to bring them back into active purchasing behaviour.
+    2. Action: Use targeted marketing campaigns,special discounts,or reminders to encourage them to return and purcahse again.
+
+- **Cluster 2 (Blue): 'Nurture'**
+    1. Rationale: This cluster represents the least active and lowest value customer but they have made purchases recently. This customer is maybe new or needs nurturing to increase their engagement.
+    2. Action: Focus on building relationships,providing excellent customer service,and offering incentives to encourage more frequent purchases.
+
+- **Cluster 3 (Green): 'Reward'**
+    1. Rationale: This cluster includes high value,very frequent buyers,many of whom are still actively purchasing. They are your most loyal customers,and rewarding their loyalty is key to maintaining their engagement.
+    2. Action: Implement a robust loyalty program,provide exclusive offers and recognise their loyalty to keep them engaged and satsfied.
 
 - Implementing K-means clustering algorithm to identify distinct customer groups
 - Analyzing customer behavior using RFM (Recency, Frequency, Monetary) analysis
 - Creating detailed customer personas based on purchasing patterns
-- Providing targeted marketing strategies for each segment
+- Providing targeted marketing strategies for each segment 
 
 ## Market Basket Analysis
 
