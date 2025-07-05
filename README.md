@@ -4,7 +4,15 @@
 Understanding customer behavior is crucial for business success in online retail or e-commerce. This project aims to uncover hidden patterns in customer transactions, identify distinct customer segments, and provide data-driven recommendations for improving customer retention and maximizing revenue. <br>
 This project uses [online retail data](https://archive.ics.uci.edu/dataset/352/online+retail) from the UCI Machine Learning Repository.The dataset contains transactional data from a UK-based online retail company. <br> 
 
-## Data Dictionary
+# Table of Contents
+
+- [Data Dictionary](#data-dictionary)
+- [EDA & Data Cleaning](#eda--data-cleaning)
+- [Customer Segmentation](#customer-segmentation)
+- [Market Basket Analysis](#market-basket-analysis)
+- [Cohort and Retention Analysis](#cohort-and-retention-analysis)
+
+# Data Dictionary
 
 | Variable Name | Role | Type | Description |
 |---------------|------|------|-------------|
@@ -39,14 +47,7 @@ We'll answer these questions using:
 
 But before diving into these advanced analyses, we'll begin with thorough Exploratory Data Analysis (EDA) and Data Cleaning.
 
-# Table of Contents
-
-- [EDA & Data Cleaning](#eda--data-cleaning)
-- [Customer Segmentation](#customer-segmentation)
-- [Market Basket Analysis](#market-basket-analysis)
-- [Cohort and Retention Analysis](#cohort-and-retention-analysis)
-
-## EDA & Data Cleaning
+# EDA & Data Cleaning
 
 Dataset contains **542,909 transactions**, from December 2010 to December 2011. <br>
 The initial data quality assessment revealed: 
@@ -129,7 +130,7 @@ On looking at the data w.r.t. date-time,we observed that:
 4. **Growth Trajectory**: Rapid international expansion and transaction volume growth
 5. **Data Quality**: After cleaning, we retained 74% of original data for robust analysis
 
-## Customer Segmentation
+# Customer Segmentation
 
 <p align="center">
   <img src="./docs/imgs/img8.png" alt="Image 1" />
@@ -151,9 +152,7 @@ The building blocks of RFM are as follows:
 - **Frequency**, which tells how frequently the customer used it.
 - **Monetary**, which is related to how much monetary value was invested toward it.
 
-
-
-### Preparing Data
+## Preparing Data
 
 <p align="center">
   <img src="./docs/imgs/img10.png" alt="Image 1" width="85%" />
@@ -184,7 +183,7 @@ The building blocks of RFM are as follows:
 
 *This data is now prepared to be used in K-Means clustering algorithm.*
 
-### What is K-Means Algorithm ?
+## What is K-Means Algorithm ?
 
 - While using the **k-means clustering** algorithm, the first step is to indicate the number of clusters ($k$) that we wish to produce in the final output.
 - The algorithm starts by selecting $k$ objects from dataset randomly that will serve as the initial centers for our clusters. These selected objects are the cluster means, also known as *centroids*. 
@@ -194,7 +193,7 @@ The building blocks of RFM are as follows:
 - This goes on repeatedly through several iterations until the cluster assignments stop altering. The clusters that are present in the current iteration are the same as the ones obtained in the previous iteration. 
 
 
-### Determining Optimal Clusters
+## Determining Optimal Clusters
 
 When working with clustering algorithms like KMeans, it's important to determine the optimal number of clusters ($k$) to achieve meaningful groupings. We will use the following two methods:
 
@@ -215,7 +214,7 @@ We get the cluster labels for each datapoint in the non-outliers dataset,and the
   <img src="./docs/imgs/img16.png" alt="Image 1" width = "75%" />
 </p>
 
-### Cluster Analysis
+## Cluster Analysis
 
 <p align="center">
   <img src="./docs/imgs/img17.png" alt="Image 1" />
@@ -273,7 +272,7 @@ Based on this we perform the cluster analysis for non-outliers datapoints and ge
     3. **Cross-selling Focus:** Introduce complementary products to increase basket size
     4. **Engagement Consistency:** Regular but not overwhelming communication
 
-### Outlier Analysis
+## Outlier Analysis
 
 - We will create completely new clusters for our outliers dataset and label them. 
 - These are based purely on the distribution and not any clustering algorithm output.
@@ -297,7 +296,7 @@ Based on this we perform the cluster analysis for non-outliers datapoints and ge
     1. The most valuable outliers, with extreme spending and frequent purchases. They are likely your top-tier customers who require special attention. 
     2. Strategy: Develop VIP programs or exclusive offers to maintain their loyalty and encourage continued engagement.
 
-### Conclusion
+## Conclusion
 
 We performed clustering-based customer segmentation that combines K-means clustering with RFE modeling. We also dealth with outliers and anomolies. The approach is simple and intuitive, and yet it yields the power of segmenting customers into groups where users with similar usage behaviors and habits are clustered together, which then provides insights that help in the understanding of usage patterns of the product or service for the purpose of converting more users into your best segments. <br>
 Everything done above can be summarised very beautifully in the figure below:
@@ -307,43 +306,32 @@ Everything done above can be summarised very beautifully in the figure below:
 </div>
 
 
-
-
-## Market Basket Analysis
-
-General stores, supermarkets like D-Mart, SmartBazaar, and online platforms such as Amazon, Flipkart, and Meesho need to maintain good profitability to run efficiently. One of the ways to achieve this is by performing **Market Basket Analysis**.
-
-Market Basket Analysis is a specialized application of **Association Rule Mining** that focuses specifically on retail and e-commerce scenarios. It examines **transactional data** to uncover patterns and relationships between different products that are purchased together by customers. The term originates from the idea of analyzing a shopper’s physical or digital basket to determine associations between items.
-
-While Association Rule Mining is a broader data mining technique used across industries to discover relationships between various entities or behaviors, **Market Basket Analysis** is a targeted form of it applied to product co-purchases in transactional settings.
-
-At its core, Market Basket Analysis seeks to answer:
-
-* Which products are frequently bought together?
-* If a customer purchases product A, what is the likelihood they will also purchase product B?
-* How can product placement or bundling be optimized to increase cross-selling?
-
-Market Basket Analysis operates on a dataset where **each record is a transaction**, containing a **set of items purchased together**. By analyzing many such transactions, patterns emerge that reflect customer behavior.
-
-There are several business goals that Market Basket Analysis can support:
-
-* **Product Placement and Store Layout**: Placing products that are frequently bought together closer to one another can improve sales. For example, if bread and butter are frequently co-purchased, placing them side by side can enhance convenience and conversion.
-* **Cross-Selling and Upselling**: E-commerce platforms use co-purchase data to recommend complementary items. Amazon’s “Frequently Bought Together” or “Customers also bought” features are based on such analysis.
-* **Inventory Management**: Knowing that products A and B are often sold together helps ensure neither goes out of stock at the expense of the other.
-* **Promotional Strategies**: Discounts and combo offers can be more effectively designed based on which items are often bought together.
-* **E-commerce Platforms**: Personalized recommendations, real-time suggestions, and website layout optimization can be improved using Market Basket insights.
-
-Thus, it contributes to **revenue optimization**, **competitive advantage**, **operational efficiency**, and **risk mitigation**.
-
-Association Rule Mining is also used in other industries:
-
-* **Healthcare**: To identify relationships between diagnoses, treatments, and medications.
-* **Financial Services**: To analyze customer behavior, such as card usage patterns, fraud detection, and cross-product selling.
-* **Telecommunications**: To discover service bundles or usage patterns and predict churn.
+<br><br>
 
 ---
 
-### How to Perform Market Basket Analysis?
+# Market Basket Analysis
+
+General stores, supermarkets like D-Mart, SmartBazaar, and online platforms such as Amazon, Flipkart, and Meesho need to maintain good profitability to run efficiently. One of the ways to achieve this is by performing **Market Basket Analysis**. <br>
+
+Market Basket Analysis is a specialized application of **Association Rule Mining** that focuses specifically on retail and e-commerce scenarios. It examines **transactional data** to uncover patterns and relationships between different products that are purchased together by customers. <br>
+
+At its core, Market Basket Analysis seeks to answer:
+
+- Which products are frequently bought together?
+- If a customer purchases product A, what is the likelihood they will also purchase product B?
+- How can product placement or bundling be optimized to increase cross-selling?
+
+Market Basket Analysis operates on a dataset where **each record is a transaction**, containing a **set of items purchased together**. By analyzing many such transactions, patterns emerge that reflect customer behavior.
+
+There are several business goals that Market Basket Analysis can support like Product Placement and Store Layout,Cross-Selling and Upselling,Inventory Management,Promotional Strategies, and real-time suggestions,personalised recommendations for E-commerce Platforms.
+
+<div align="center">
+  <img src="./docs/imgs/img26.png" width="80%" />
+</div>
+
+
+## How to Perform Market Basket Analysis?
 
 Market Basket Analysis involves two fundamental steps, which together constitute the **Association Rule Mining** process:
 
@@ -352,21 +340,21 @@ Market Basket Analysis involves two fundamental steps, which together constitute
 
 
 <div style="text-align: center;">
-  <img src="image-1.png" alt="Association Rules Flow" width="600"/>
+  <img src="./docs/imgs/image-1.png" alt="Association Rules Flow" width="600"/>
 </div>
----
 
-#### Frequent Itemset Mining
+
+### Frequent Itemset Mining
 
 The first step of Market Basket Analysis is to go through the dataset where each row represents a transaction (basket of items bought together), and extract **all unique item combinations**.
 
-We do not pass frequency counts of itemsets to the algorithm. Instead, we provide **raw transaction data**, and the algorithm calculates how often each itemset appears — this frequency is called **support**.
+Then pass it to the **apriori** algorithm,which calculates how often each itemset appears — this frequency is called **support**.
 
 Example transaction itemsets:
 
-* 1-itemset: {Bread}
-* 2-itemset: {Bread, Butter}
-* 3-itemset: {Bread, Butter, Milk}
+* 1-itemset: Bread
+* 2-itemset: Bread, Butter
+* 3-itemset: Bread, Butter, Milk
 
 The **support** of an itemset is defined as the proportion of transactions that contain that itemset:
 
@@ -378,9 +366,9 @@ Consider a dataset with 1000 transactions:
 
 | Item/Itemset    | Frequency | Support |
 | --------------- | --------- | ------- |
-| {Bread}         | 600       | 0.60    |
-| {Butter}        | 400       | 0.40    |
-| {Bread, Butter} | 300       | 0.30    |
+| Bread           | 600       | 0.60    |
+| Butter          | 400       | 0.40    |
+| Bread, Butter   | 300       | 0.30    |
 
 If the minimum support threshold is 0.25 (25%), all three itemsets above would be considered **frequent**.
 
@@ -391,9 +379,25 @@ A fundamental principle in itemset mining is the **Downward Closure Property**, 
 
 This property helps reduce computation by pruning unpromising candidate itemsets.
 
----
+For our problem we will be focusing on the **retain** customers found in the above customer segmentation problem. <br>
+We will like to do cross-selling for such customers, it is one of the strategies of retaining customers. <br>
+There are **3480 itemsets** in our basket. This data will then need to be transformed using a **transaction encoder**.
 
-#### Association Rule Generation and Key Metrics
+```
+te = TransactionEncoder() # defining the encoder object
+te_array = te.fit(mybasket).transform(mybasket)
+basket_df = pd.DataFrame(te_array,columns = te.columns_ , index=mybasket.index)
+basket_df.head(5)
+```
+And fed into the algorithm to get the most frequent itemsets. We need to set a **minimum support threshold**, which we will keep at min_support = 0.01 (1%) i.e. itemsets that have occured atleast 1% in all of the transactions.
+
+```
+frequent_itemsets = apriori(basket_df,min_support = 0.01,use_colnames= True) # atleast 1 percent appearances
+```
+
+We get **905** itemsets.
+
+### Association Rule Generation and Key Metrics
 
 Once frequent itemsets are discovered, the next step is to generate **association rules** in the form:
 
@@ -411,7 +415,6 @@ For example: {Bread, Butter} → {Milk}
 
 The strength of these rules is measured using the following metrics:
 
----
 
 #### Support
 
@@ -426,7 +429,6 @@ Example:
 Support = 300 / 1000 = 0.30
 Interpretation: 30% of all transactions include both items.
 
----
 
 #### Confidence
 
@@ -440,7 +442,6 @@ Example:
 Confidence = 300 / 600 = 0.50
 Interpretation: 50% of the customers who bought bread also bought butter.
 
----
 
 #### Lift
 
@@ -457,8 +458,6 @@ This measures how much more likely Y is to be purchased when X is purchased, com
 Example:
 Lift = 0.50 / 0.40 = 1.25
 Interpretation: Customers who buy bread are 1.25 times more likely to buy butter than average.
-
----
 
 ### Example: Rule Evaluation
 
@@ -483,7 +482,6 @@ Consider the following transactional summary for a grocery store (1000 total tra
 | Lift       | 1.25  | Positive correlation (1.25× more likely)     |
 | Conviction | 1.20  | Moderate dependency between bread and butter |
 
----
 
 ## The Apriori Algorithm
 
@@ -491,10 +489,11 @@ We use the **Apriori algorithm** to perform **frequent itemset mining** in the f
 The algorithm is as follows:
 
 <div style="text-align: center;">
-  <img src="image-3.png" alt="Association Rules Flow" width="600"/>
+  <img src="./docs/imgs/image-3.png" alt="Association Rules Flow" width="600"/>
 </div>
 
----
+
+## Conclusion
 
 Market Basket Analysis is one of the most practical and impactful applications of data mining for businesses. By systematically identifying frequent itemsets and generating meaningful association rules, organizations can derive actionable insights that drive smarter product placement, targeted promotions, and personalized recommendations.
 
