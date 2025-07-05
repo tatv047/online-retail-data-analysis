@@ -77,7 +77,7 @@ The dataset reveals a strong geographic concentration:
 - **France**: 1.9% of orders
 - **Ireland (EIRE)**: 1.7% of orders
 
-![country wise distribution](./docs/img1.png)
+![country wise distribution](./docs/imgs/img1.png)
 
 This distribution aligns with the company's UK-based operations and domestic market focus. <br>
 When checked for the distribution of order volume by country, *United Kingdom* came at the top again cornering major chunk of it.
@@ -87,7 +87,7 @@ While looking at the distribution characterstic of various columns we observe:
 - **Unit Price**: Right-skewed with majority of products priced under £5
 
 <p align="center">
-  <img src="./docs/img2.png" alt="Image 1" width="80%"/>
+  <img src="./docs/imgs/img2.png" alt="Image 1" width="80%"/>
 </p>
 
 
@@ -95,9 +95,9 @@ While looking at the distribution characterstic of various columns we observe:
 - Outliers are dealt seperately on case basis in each of the three problems.
 
 <p align="center">
-  <img src="./docs/img3.png" alt="Image 1" width="33%"/>
-  <img src="./docs/img4.png" alt="Image 2" width="33%"/>
-  <img src="./docs/img5.png" alt="Image 2" width="33%"/>
+  <img src="./docs/imgs/img3.png" alt="Image 1" width="33%"/>
+  <img src="./docs/imgs/img4.png" alt="Image 2" width="33%"/>
+  <img src="./docs/imgs/img5.png" alt="Image 2" width="33%"/>
 </p>
 
 The analysis of the most frequently purchased items reveals:
@@ -106,7 +106,7 @@ The analysis of the most frequently purchased items reveals:
 - Bulk purchasing behavior for certain product categories
 
 <p align="center">
-  <img src="./docs/img6.png" alt="Image 1" width="95%"/>
+  <img src="./docs/imgs/img6.png" alt="Image 1" width="95%"/>
 </p>
 
 On looking at the data w.r.t. date-time,we observed that:
@@ -118,7 +118,7 @@ On looking at the data w.r.t. date-time,we observed that:
 - **Business Growth**: Significant expansion from 2010 to 2011
 
 <p align="center">
-  <img src="./docs/img7.png" alt="Image 1" width="95%"/>
+  <img src="./docs/imgs/img7.png" alt="Image 1" width="95%"/>
 </p>
 
 **EDA insights:**
@@ -132,7 +132,7 @@ On looking at the data w.r.t. date-time,we observed that:
 ## Customer Segmentation
 
 <p align="center">
-  <img src="./docs/img8.png" alt="Image 1" />
+  <img src="./docs/imgs/img8.png" alt="Image 1" />
 </p>
 
 **Customer Segmentation** is the process of division of customer base into several groups of individuals that share a similarity in different ways that are relevant to marketing such as gender, age, interests, and miscellaneous spending habits. <br>
@@ -153,13 +153,13 @@ The building blocks of RFM are as follows:
 
 
 
-# Preparing Data
+### Preparing Data
 
 <p align="center">
-  <img src="./docs/img10.png" alt="Image 1" width="85%" />
+  <img src="./docs/imgs/img10.png" alt="Image 1" width="85%" />
 </p>
 <p align="center">
-  <img src="./docs/img11.png" alt="Image 1" width="85%"/>
+  <img src="./docs/imgs/img11.png" alt="Image 1" width="85%"/>
 </p>
 
 
@@ -170,7 +170,7 @@ The building blocks of RFM are as follows:
 
 <p align="center">
   <figure style="text-align: center;">
-    <img src="./docs/img12.png" alt="Image 1">
+    <img src="./docs/imgs/img12.png" alt="Image 1">
     <figcaption><em> Distribution of RFM for  non-outliers</em></figcaption>
   </figure>
 </p>
@@ -178,8 +178,8 @@ The building blocks of RFM are as follows:
 - Then we move on to creating **RFM** datapoints for each entry in non-outliers dataset. 
 - K-means uses Euclidean distance to assign points to the nearest cluster center. If your features have different units or scales, the feature with the larger scale will dominate the distance calculations. So we will need to **scale** the data too.
 <p align="center">
-  <img src="./docs/img13.png" alt="Image 1" width="45%"/>
-  <img src="./docs/img14.png" alt="Image 1" width="45%"/>
+  <img src="./docs/imgs/img13.png" alt="Image 1" width="45%"/>
+  <img src="./docs/imgs/img14.png" alt="Image 1" width="45%"/>
 </p>
 
 *This data is now prepared to be used in K-Means clustering algorithm.*
@@ -203,7 +203,7 @@ When working with clustering algorithms like KMeans, it's important to determine
 - **Average Silhouette Method:** The silhouette score measures how well each point fits within its cluster compared to others. It ranges from -1 to 1, where a higher score indicates better-defined and more separated clusters. The average silhouette method calculates the mean silhouette score for different values of $k$. The optimal number of clusters is the one that maximizes the average silhouette score, indicating the best balance between cohesion and separation.
 
 <p align="center">
-  <img src="./docs/img15.png" alt="Image 1" />
+  <img src="./docs/imgs/img15.png" alt="Image 1" width = "75%" />
 </p>
 
 From the output above, $k=4$ looks like a good trade-off. <br>
@@ -212,67 +212,296 @@ Having determined the number of clusters, we apply K-means to create the custome
 We get the cluster labels for each datapoint in the non-outliers dataset,and then assign it. The visualisation is as follows:
 
 <p align="center">
-  <img src="./docs/img18.png" alt="Image 1" width = "49%" />
-  <img src="./docs/img19.png" alt="Image 1" width = "49%" />
+  <img src="./docs/imgs/img16.png" alt="Image 1" width = "75%" />
+</p>
+
+### Cluster Analysis
+
+<p align="center">
+  <img src="./docs/imgs/img17.png" alt="Image 1" />
+</p>
+
+<p align="center">
+  <img src="./docs/imgs/img18.png" alt="Image 1" width = "49%" />
+  <img src="./docs/imgs/img19.png" alt="Image 1" width = "49%" />
 </p>
 <p align="center">
-  <img src="./docs/img20.png" alt="Image 1" width="50%" >
+  <img src="./docs/imgs/img20.png" alt="Image 1" width="50%" >
 </p>
 
 Based on this we perform the cluster analysis for non-outliers datapoints and get the following segments:
-- **Cluster 0 (Red): 'Retain'**
-    1. Rationale: This cluster represents high-value customers who purchase regularly, though not always recently. The focus should be retention efforts to maintain their loyalty and spending levels.
-    2. Action: Implement loyalty programs,personalised offers,and regular engagement to ensure they remain active.
 
-- **Cluster 1 (Orange): 'Re-enagage'**
-    1. Rationale: This cluster represents low-value and infrequent customers who haven't purchased recently. The focus should be on re-engagement to bring them back into active purchasing behaviour.
-    2. Action: Use targeted marketing campaigns,special discounts,or reminders to encourage them to return and purcahse again.
 
-- **Cluster 2 (Blue): 'Nurture'**
-    1. Rationale: This cluster represents the least active and lowest value customer but they have made purchases recently. This customer is maybe new or needs nurturing to increase their engagement.
-    2. Action: Focus on building relationships,providing excellent customer service,and offering incentives to encourage more frequent purchases.
+- **Cluster 0 (Orange): "Nurture"**
+  - Recent purchasers but with very low spend and frequency
+  - Maybe price-conscious customers who buy only during promotions
+  - May be new customers still testing your brand
+  - **Strategy:**
+    1. **Value Migration:** Gradually introduce higher-value products through cross-selling
+    2. **Frequency Building:** Implement programs to increase purchase frequency (subscription models, bundles)
+    3. **Price Sensitivity Management:** Use graduated pricing to move them up the value chain
+    4. **Onboarding Programs:** If new customers, focus on product education and value demonstration
 
-- **Cluster 3 (Green): 'Reward'**
-    1. Rationale: This cluster includes high value,very frequent buyers,many of whom are still actively purchasing. They are your most loyal customers,and rewarding their loyalty is key to maintaining their engagement.
-    2. Action: Implement a robust loyalty program,provide exclusive offers and recognise their loyalty to keep them engaged and satsfied.
+- **Cluster 1 (Red): "Re-engage"**
+  - Moderate spenders ($200-800 range) with decent purchase frequency.
+  - Poor recency scores indicate they're becoming inactive.
+  - Risk of losing these customers.
+  - **Strategy:**
+    1. **Immediate Win-Back Campaign:** Urgent personalized outreach like using "We miss you" messages.
+    2. **Investigate Churn Reasons:** Survey or direct contact to understand why they've stopped purchasing.
+    3. **Reactivation Incentives:** Targeted discounts or exclusive offers to prompt immediate purchase.
+    4. **Engagement Monitoring:** Track response rates and adjust messaging accordingly.
 
-- Implementing K-means clustering algorithm to identify distinct customer groups
-- Analyzing customer behavior using RFM (Recency, Frequency, Monetary) analysis
-- Creating detailed customer personas based on purchasing patterns
-- Providing targeted marketing strategies for each segment 
+- **Cluster 2 (Green): "Reward"**
+  - Highest spending customers ($2000-4000 range)
+  - Highest purchase frequency (8-12 transactions)
+  - These are your profit drivers and brand advocates, your best segment,customers who could be treated as VIP.
+  - **Strategy:**
+    1. **VIP Treatment:** Exclusive access to new products, priority customer service
+    2. **Referral Programs:** Leverage their satisfaction to acquire similar high-value customers
+    3. **Retention Focus:** Ensure they never have reason to leave through exceptional service
+    4. **Upselling Opportunities:** Introduce premium products or services
+    5. **Feedback Loop:** Use their insights for product development and business decisions
+
+- **Cluster 3 (Blue): "Retain"**
+  - Balanced performance across all RFM dimensions
+  - Reliable revenue generators with room for growth
+  - Potential to migrate to Champion status with right incentives
+  - **Strategy:**
+    1. **Growth Programs:** Targeted campaigns to increase both spend and frequency
+    2. **Loyalty Development:** Implement tiered loyalty programs to encourage progression
+    3. **Cross-selling Focus:** Introduce complementary products to increase basket size
+    4. **Engagement Consistency:** Regular but not overwhelming communication
+
+### Outlier Analysis
+
+- We will create completely new clusters for our outliers dataset and label them. 
+- These are based purely on the distribution and not any clustering algorithm output.
+- The distribution for these new clusters is as following:
+
+<div align="center">
+  <img src="./docs/imgs/img22.png" width="80%" style="margin-bottom: 10px;" />
+  <img src="./docs/imgs/img23.png" width="80%" style="margin-bottom: 10px;" />
+  <img src="./docs/imgs/img24.png" width="80%" />
+</div>
+
+- **Cluster -1 (Monetary Outliers) PAMPER:** 
+    1. High spenders but not necessarily frequent buyers. Their purchases are large but infrequent.
+    2. Strategy: Focus on maintaining their loyalty with personalized offers or luxury services that cater to their high spending capacity.
+
+- **Cluster -2 (Frequency Outliers) UPSELL:** 
+    1. Frequent buyers who spend less per purchase. These customers are consistently engaged but might benefit from upselling opportunities. 
+    2. Strategy: Implement loyalty programs or bundle deals to encourage higher spending per visit, given their frequent engagement.
+
+- **Cluster -3 (Monetary & Frequency Outliers) DELIGHT:**
+    1. The most valuable outliers, with extreme spending and frequent purchases. They are likely your top-tier customers who require special attention. 
+    2. Strategy: Develop VIP programs or exclusive offers to maintain their loyalty and encourage continued engagement.
+
+### Conclusion
+
+We performed clustering-based customer segmentation that combines K-means clustering with RFE modeling. We also dealth with outliers and anomolies. The approach is simple and intuitive, and yet it yields the power of segmenting customers into groups where users with similar usage behaviors and habits are clustered together, which then provides insights that help in the understanding of usage patterns of the product or service for the purpose of converting more users into your best segments. <br>
+Everything done above can be summarised very beautifully in the figure below:
+
+<div align="center">
+  <img src="./docs/imgs/img25.png" width="80%" />
+</div>
+
+
+
 
 ## Market Basket Analysis
 
-- Discovering associations between products frequently purchased together
-- Implementing association rule mining techniques (Apriori algorithm)
-- Identifying cross-selling and upselling opportunities
-- Optimizing product placement and recommendation systems
+General stores, supermarkets like D-Mart, SmartBazaar, and online platforms such as Amazon, Flipkart, and Meesho need to maintain good profitability to run efficiently. One of the ways to achieve this is by performing **Market Basket Analysis**.
+
+Market Basket Analysis is a specialized application of **Association Rule Mining** that focuses specifically on retail and e-commerce scenarios. It examines **transactional data** to uncover patterns and relationships between different products that are purchased together by customers. The term originates from the idea of analyzing a shopper’s physical or digital basket to determine associations between items.
+
+While Association Rule Mining is a broader data mining technique used across industries to discover relationships between various entities or behaviors, **Market Basket Analysis** is a targeted form of it applied to product co-purchases in transactional settings.
+
+At its core, Market Basket Analysis seeks to answer:
+
+* Which products are frequently bought together?
+* If a customer purchases product A, what is the likelihood they will also purchase product B?
+* How can product placement or bundling be optimized to increase cross-selling?
+
+Market Basket Analysis operates on a dataset where **each record is a transaction**, containing a **set of items purchased together**. By analyzing many such transactions, patterns emerge that reflect customer behavior.
+
+There are several business goals that Market Basket Analysis can support:
+
+* **Product Placement and Store Layout**: Placing products that are frequently bought together closer to one another can improve sales. For example, if bread and butter are frequently co-purchased, placing them side by side can enhance convenience and conversion.
+* **Cross-Selling and Upselling**: E-commerce platforms use co-purchase data to recommend complementary items. Amazon’s “Frequently Bought Together” or “Customers also bought” features are based on such analysis.
+* **Inventory Management**: Knowing that products A and B are often sold together helps ensure neither goes out of stock at the expense of the other.
+* **Promotional Strategies**: Discounts and combo offers can be more effectively designed based on which items are often bought together.
+* **E-commerce Platforms**: Personalized recommendations, real-time suggestions, and website layout optimization can be improved using Market Basket insights.
+
+Thus, it contributes to **revenue optimization**, **competitive advantage**, **operational efficiency**, and **risk mitigation**.
+
+Association Rule Mining is also used in other industries:
+
+* **Healthcare**: To identify relationships between diagnoses, treatments, and medications.
+* **Financial Services**: To analyze customer behavior, such as card usage patterns, fraud detection, and cross-product selling.
+* **Telecommunications**: To discover service bundles or usage patterns and predict churn.
+
+---
+
+### How to Perform Market Basket Analysis?
+
+Market Basket Analysis involves two fundamental steps, which together constitute the **Association Rule Mining** process:
+
+1. **Frequent Itemset Mining**: Identify sets of items that frequently appear together in transactions. This is typically done using algorithms such as **Apriori**.
+2. **Association Rule Generation**: Generate “if-then” rules from the frequent itemsets. These rules describe how the presence of certain items in a transaction implies the presence of others.
+
+
+<div style="text-align: center;">
+  <img src="image-1.png" alt="Association Rules Flow" width="600"/>
+</div>
+---
+
+#### Frequent Itemset Mining
+
+The first step of Market Basket Analysis is to go through the dataset where each row represents a transaction (basket of items bought together), and extract **all unique item combinations**.
+
+We do not pass frequency counts of itemsets to the algorithm. Instead, we provide **raw transaction data**, and the algorithm calculates how often each itemset appears — this frequency is called **support**.
+
+Example transaction itemsets:
+
+* 1-itemset: {Bread}
+* 2-itemset: {Bread, Butter}
+* 3-itemset: {Bread, Butter, Milk}
+
+The **support** of an itemset is defined as the proportion of transactions that contain that itemset:
+
+$$
+\text{Support}(I) = \frac{\text{Number of transactions containing } I}{\text{Total number of transactions}} = \frac{|\{t \in D : I \subseteq t\}|}{|D|}
+$$
+
+Consider a dataset with 1000 transactions:
+
+| Item/Itemset    | Frequency | Support |
+| --------------- | --------- | ------- |
+| {Bread}         | 600       | 0.60    |
+| {Butter}        | 400       | 0.40    |
+| {Bread, Butter} | 300       | 0.30    |
+
+If the minimum support threshold is 0.25 (25%), all three itemsets above would be considered **frequent**.
+
+A fundamental principle in itemset mining is the **Downward Closure Property**, which states:
+
+* If an itemset is frequent, all of its subsets must also be frequent.
+* If an itemset is infrequent, none of its supersets can be frequent.
+
+This property helps reduce computation by pruning unpromising candidate itemsets.
+
+---
+
+#### Association Rule Generation and Key Metrics
+
+Once frequent itemsets are discovered, the next step is to generate **association rules** in the form:
+
+$$
+X \rightarrow Y
+$$
+
+Where:
+
+* **X** (antecedent): the “if” part
+* **Y** (consequent): the “then” part
+
+For example: {Bread, Butter} → {Milk}
+“If a customer buys bread and butter, they are also likely to buy milk.”
+
+The strength of these rules is measured using the following metrics:
+
+---
+
+#### Support
+
+$$
+\text{Support}(X \rightarrow Y) = \text{Support}(X \cup Y)
+$$
+
+This indicates how often the entire itemset (X and Y together) appears in the dataset.
+
+Example:
+**Rule:** Bread → Butter
+Support = 300 / 1000 = 0.30
+Interpretation: 30% of all transactions include both items.
+
+---
+
+#### Confidence
+
+$$
+\text{Confidence}(X \rightarrow Y) = \frac{\text{Support}(X \cup Y)}{\text{Support}(X)}
+$$
+
+This measures the proportion of transactions with X that also contain Y.
+
+Example:
+Confidence = 300 / 600 = 0.50
+Interpretation: 50% of the customers who bought bread also bought butter.
+
+---
+
+#### Lift
+
+$$
+\text{Lift}(X \rightarrow Y) = \frac{\text{Confidence}(X \rightarrow Y)}{\text{Support}(Y)} = \frac{\text{Support}(X \cup Y)}{\text{Support}(X) \times \text{Support}(Y)}
+$$
+
+This measures how much more likely Y is to be purchased when X is purchased, compared to when X and Y are independent.
+
+* Lift = 1 → X and Y are independent
+* Lift > 1 → Positive association
+* Lift < 1 → Negative association
+
+Example:
+Lift = 0.50 / 0.40 = 1.25
+Interpretation: Customers who buy bread are 1.25 times more likely to buy butter than average.
+
+---
+
+### Example: Rule Evaluation
+
+Consider the following transactional summary for a grocery store (1000 total transactions):
+
+| Item/Combination      | Frequency | Support |
+| --------------------- | --------- | ------- |
+| Bread                 | 600       | 0.60    |
+| Butter                | 400       | 0.40    |
+| Milk                  | 500       | 0.50    |
+| Bread + Butter        | 300       | 0.30    |
+| Bread + Milk          | 350       | 0.35    |
+| Butter + Milk         | 200       | 0.20    |
+| Bread + Butter + Milk | 150       | 0.15    |
+
+**Rule:** Bread → Butter
+
+| Metric     | Value | Interpretation                               |
+| ---------- | ----- | -------------------------------------------- |
+| Support    | 0.30  | 30% of transactions contain both             |
+| Confidence | 0.50  | 50% of bread buyers also buy butter          |
+| Lift       | 1.25  | Positive correlation (1.25× more likely)     |
+| Conviction | 1.20  | Moderate dependency between bread and butter |
+
+---
+
+## The Apriori Algorithm
+
+We use the **Apriori algorithm** to perform **frequent itemset mining** in the first step of Market Basket Analysis. It uses a **level-wise iterative approach**, based on the **Downward Closure Property**. We pass a list of transactions (baskets), each containing items, apriori then calculates support from scratch.  <br>
+The algorithm is as follows:
+
+<div style="text-align: center;">
+  <img src="image-3.png" alt="Association Rules Flow" width="600"/>
+</div>
+
+---
+
+Market Basket Analysis is one of the most practical and impactful applications of data mining for businesses. By systematically identifying frequent itemsets and generating meaningful association rules, organizations can derive actionable insights that drive smarter product placement, targeted promotions, and personalized recommendations.
 
 
 ## Cohort and Retention Analysis
 
-- Tracking customer retention rates over time
-- Analyzing customer lifetime value and churn patterns
-- Identifying factors that influence customer loyalty
-- Developing strategies to improve customer retention
 
-## Business Impact
-
-The insights generated from this analysis will enable the retail company to:
-- Develop personalized marketing campaigns for different customer segments
-- Optimize inventory management and product bundling strategies
-- Improve customer retention through targeted interventions
-- Increase revenue through strategic cross-selling and upselling
-- Make data-driven decisions for business growth
-
-## Technologies Used
-
-- **Python** for data analysis and visualization
-- **Pandas & NumPy** for data manipulation
-- **Scikit-learn** for clustering algorithms
-- **Matplotlib & Seaborn** for visualization
-- **MLxtend** for market basket analysis
-- **Plotly** for interactive visualizations
 
 
 
