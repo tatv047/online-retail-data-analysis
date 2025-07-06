@@ -312,6 +312,10 @@ Everything done above can be summarised very beautifully in the figure below:
 
 # Market Basket Analysis
 
+<div align="center">
+  <img src="./docs/imgs/img27.png" width="80%" />
+</div>
+
 General stores, supermarkets like D-Mart, SmartBazaar, and online platforms such as Amazon, Flipkart, and Meesho need to maintain good profitability to run efficiently. One of the ways to achieve this is by performing **Market Basket Analysis**. <br>
 
 Market Basket Analysis is a specialized application of **Association Rule Mining** that focuses specifically on retail and e-commerce scenarios. It examines **transactional data** to uncover patterns and relationships between different products that are purchased together by customers. <br>
@@ -333,7 +337,7 @@ There are several business goals that Market Basket Analysis can support like Pr
 
 ## How to Perform Market Basket Analysis?
 
-Market Basket Analysis involves two fundamental steps, which together constitute the **Association Rule Mining** process:
+Market Basket Analysis involves two fundamental steps:
 
 1. **Frequent Itemset Mining**: Identify sets of items that frequently appear together in transactions. This is typically done using algorithms such as **Apriori**.
 2. **Association Rule Generation**: Generate “if-then” rules from the frequent itemsets. These rules describe how the presence of certain items in a transaction implies the presence of others.
@@ -348,54 +352,22 @@ Market Basket Analysis involves two fundamental steps, which together constitute
 
 The first step of Market Basket Analysis is to go through the dataset where each row represents a transaction (basket of items bought together), and extract **all unique item combinations**.
 
-Then pass it to the **apriori** algorithm,which calculates how often each itemset appears — this frequency is called **support**.
+Then pass it to the **apriori** algorithm,which calculates how often each itemset appears, this frequency is called **support**.
+The algorithm uses a **level-wise iterative approach**, based on the **Downward Closure Property**. We pass a list of transactions (baskets), each containing items, apriori then calculates support from scratch.  <br>
+The algorithm is as follows:
 
-Example transaction itemsets:
+<div style="text-align: center;">
+  <img src="./docs/imgs/image-3.png" alt="Association Rules Flow" width="600"/>
+</div>
 
-* 1-itemset: Bread
-* 2-itemset: Bread, Butter
-* 3-itemset: Bread, Butter, Milk
+We need to pass the minimum support threshold as a parameter,if the threshold is 0.25 (25%), then all itemsets having support equal to or above 0.25 would be considered **frequent**.
 
-The **support** of an itemset is defined as the proportion of transactions that contain that itemset:
-
-$$
-\text{Support}(I) = \frac{\text{Number of transactions containing } I}{\text{Total number of transactions}} = \frac{|\{t \in D : I \subseteq t\}|}{|D|}
-$$
-
-Consider a dataset with 1000 transactions:
-
-| Item/Itemset    | Frequency | Support |
-| --------------- | --------- | ------- |
-| Bread           | 600       | 0.60    |
-| Butter          | 400       | 0.40    |
-| Bread, Butter   | 300       | 0.30    |
-
-If the minimum support threshold is 0.25 (25%), all three itemsets above would be considered **frequent**.
-
-A fundamental principle in itemset mining is the **Downward Closure Property**, which states:
+The **Downward Closure Property** being used states:
 
 * If an itemset is frequent, all of its subsets must also be frequent.
 * If an itemset is infrequent, none of its supersets can be frequent.
 
 This property helps reduce computation by pruning unpromising candidate itemsets.
-
-For our problem we will be focusing on the **retain** customers found in the above customer segmentation problem. <br>
-We will like to do cross-selling for such customers, it is one of the strategies of retaining customers. <br>
-There are **3480 itemsets** in our basket. This data will then need to be transformed using a **transaction encoder**.
-
-```
-te = TransactionEncoder() # defining the encoder object
-te_array = te.fit(mybasket).transform(mybasket)
-basket_df = pd.DataFrame(te_array,columns = te.columns_ , index=mybasket.index)
-basket_df.head(5)
-```
-And fed into the algorithm to get the most frequent itemsets. We need to set a **minimum support threshold**, which we will keep at min_support = 0.01 (1%) i.e. itemsets that have occured atleast 1% in all of the transactions.
-
-```
-frequent_itemsets = apriori(basket_df,min_support = 0.01,use_colnames= True) # atleast 1 percent appearances
-```
-
-We get **905** itemsets.
 
 ### Association Rule Generation and Key Metrics
 
@@ -459,9 +431,7 @@ Example:
 Lift = 0.50 / 0.40 = 1.25
 Interpretation: Customers who buy bread are 1.25 times more likely to buy butter than average.
 
-### Example: Rule Evaluation
-
-Consider the following transactional summary for a grocery store (1000 total transactions):
+Consider the following example of the transactional summary for a grocery store (1000 total transactions):
 
 | Item/Combination      | Frequency | Support |
 | --------------------- | --------- | ------- |
@@ -480,22 +450,92 @@ Consider the following transactional summary for a grocery store (1000 total tra
 | Support    | 0.30  | 30% of transactions contain both             |
 | Confidence | 0.50  | 50% of bread buyers also buy butter          |
 | Lift       | 1.25  | Positive correlation (1.25× more likely)     |
-| Conviction | 1.20  | Moderate dependency between bread and butter |
 
+## Market Basket Analysis for "Nurture" segment customers 
 
-## The Apriori Algorithm
+- For our problem we will be focusing on the **nurture** customers found in the above customer segmentation problem. 
+- Customers in this segment are new, infrequent, price-sensitive who are drawn to discounts or offers.
+They have low frequency, low lifetime, but decent monetary value.
+- **Our goals should be:**
+  - Rules with **High Confidence** so that we can avoid recommending items with weak linkage.
+  - Slightly **low support** as the customers are low-frequency.
+  - **Strong lift** to discover non-random co-puchases.
+- That is why the thresholds used while selecting rules will be:
+  1. Confidence >= 0.6
+  2. Support >= 0.01
+  3. Lift >= 2.5
+- To find the most interesting rules,we will sort the Rules by "lift" because we want *high confidence with high high lift.*
+- We won't be using confidence because confidence is biased by popular items. If “bread” is bought 90% of the time overall, almost everything will appear confidently related to it. High confidence with low lift just tells you people already buy the item a lot.
+- Product recommendations for cross-selling can be done based on the results found here.
+- There are **3220 distinct items** bought by nurture-customers. 
+- The transaction data will be used to create a basket, a basket refers to a single transaction or purchase instance that contains a collection of all the items purchased together.
+- We will be using the **mlxtend** library for our work, this basket would need to be transformed using **transaction encoder** for it to be used in the **apriori** algorithm.
 
-We use the **Apriori algorithm** to perform **frequent itemset mining** in the first step of Market Basket Analysis. It uses a **level-wise iterative approach**, based on the **Downward Closure Property**. We pass a list of transactions (baskets), each containing items, apriori then calculates support from scratch.  <br>
-The algorithm is as follows:
+```
+te = TransactionEncoder() # defining the encoder object
+te_array = te.fit(mybasket).transform(mybasket)
+basket_df = pd.DataFrame(te_array,columns = te.columns_ , index=mybasket.index)
+basket_df.head(5)
+```
+- We need to set a **minimum support threshold**, which we will keep at min_support = 0.01 (1%) i.e. itemsets that have occured atleast 1% in all of the transactions. With ~50,000 nurture transactions, this catches items in ≥ 500 transactions.
+
+```
+frequent_itemsets = apriori(basket_df,min_support = 0.01,use_colnames= True) # atleast 1 percent appearances
+```
+- We get **759** itemsets in the frequent_itemsets.
+- On close examination,it was found that:
+  - 619 itemsets had only single item.
+  - 133 itemsets had a pair
+  - 7 itemsets had triplets.
+- The top 10 most frequent itemsets had only one item.
 
 <div style="text-align: center;">
-  <img src="./docs/imgs/image-3.png" alt="Association Rules Flow" width="600"/>
+  <img src="./docs/imgs/img28.png" alt="Association Rules Flow" width="600"/>
 </div>
+
+- Given below is a heatmap for the support scores of possible combinations from the items in the top-10 pairs list.
+
+<div style="text-align: center;">
+  <img src="./docs/imgs/img29.png" alt="Association Rules Flow" width="600"/>
+</div>
+
+- We then generate the rules with *a minimum threshold on confidence of 0.6*. There is also a threshold on **lift** of 2.5.
+- We get **64 rules** for our frequent_itemset.
+
+```
+# Generate rules using frequent_itemsets DataFrame
+rules = association_rules(frequent_itemsets, metric="confidence", min_threshold=0.6)
+rules = rules[
+    (rules['lift'] >= 2.5)
+]
+rules
+```
+- Given below is are the support,confidence and lift of the top-10 rules sorted by "lift" scores:
+
+<div style="text-align: center;">
+  <img src="./docs/imgs/img30.png" alt="Association Rules Flow" width="80%"/>
+</div>
+
+  | Rule No. | Antecedent                         | Consequent                         |
+  | -------- | ---------------------------------- | ---------------------------------- |
+  | Rule 1   | SET/10 PINK POLKADOT PARTY CANDLES | SET/10 BLUE POLKADOT PARTY CANDLES |
+  | Rule 2   | SET/10 BLUE POLKADOT PARTY CANDLES | SET/10 PINK POLKADOT PARTY CANDLES |
+  | Rule 3   | PINK HAPPY BIRTHDAY BUNTING        | BLUE HAPPY BIRTHDAY BUNTING        |
+  | Rule 4   | BLUE HAPPY BIRTHDAY BUNTING        | PINK HAPPY BIRTHDAY BUNTING        |
+  | Rule 5   | POPPY'S PLAYHOUSE LIVINGROOM       | POPPY'S PLAYHOUSE BEDROOM          |
+  | Rule 6   | POPPY'S PLAYHOUSE BEDROOM          | POPPY'S PLAYHOUSE LIVINGROOM       |
+  | Rule 7   | GLASS APOTHECARY BOTTLE PERFUME    | GLASS APOTHECARY BOTTLE TONIC      |
+  | Rule 8   | GLASS APOTHECARY BOTTLE TONIC      | GLASS APOTHECARY BOTTLE PERFUME    |
+  | Rule 9   | CHILDRENS CUTLERY DOLLY GIRL       | CHILDRENS CUTLERY SPACEBOY         |
+  | Rule 10  | CHILDRENS CUTLERY SPACEBOY         | CHILDRENS CUTLERY DOLLY GIRL       |
 
 
 ## Conclusion
 
-Market Basket Analysis is one of the most practical and impactful applications of data mining for businesses. By systematically identifying frequent itemsets and generating meaningful association rules, organizations can derive actionable insights that drive smarter product placement, targeted promotions, and personalized recommendations.
+- Market Basket Analysis is one of the most practical and impactful applications of data mining for businesses. By systematically identifying frequent itemsets and generating meaningful association rules, organizations can derive actionable insights that drive smarter product placement, targeted promotions, and personalized recommendations.
+- Our nurture-customers buy fewer things.
+- We want to find connections that are strong and unexpected, not just frequent.
+- So Lift gives us more signal than just using Confidence. And we find very interesting relations as above..
 
 
 ## Cohort and Retention Analysis
