@@ -2,9 +2,17 @@
 # Online Retail Data Analysis
 
 Understanding customer behavior is crucial for business success in online retail or e-commerce. This project aims to uncover hidden patterns in customer transactions, identify distinct customer segments, and provide data-driven recommendations for improving customer retention and maximizing revenue. <br>
-This project uses [online retail data](https://archive.ics.uci.edu/dataset/352/online+retail) from the UCI Machine Learning Repository.The dataset contains transactional data from a UK-based online retail company. <br> 
 
-## Getting Started
+# Table of Contents
+
+- [Getting started](#getting-started)
+- [Introduction](#introduction)
+- [EDA & Data Cleaning](#eda--data-cleaning)
+- [Customer Segmentation](#customer-segmentation)
+- [Market Basket Analysis](#market-basket-analysis)
+- [Cohort Retention Analysis](#cohort-retention-analysis)
+
+# Getting Started
 
 1. Clone repository
 
@@ -39,26 +47,11 @@ This project uses [online retail data](https://archive.ics.uci.edu/dataset/352/o
     jupyter eda.ipynb
     ```
 
-# Table of Contents
 
-- [Data Dictionary](#data-dictionary)
-- [EDA & Data Cleaning](#eda--data-cleaning)
-- [Customer Segmentation](#customer-segmentation)
-- [Market Basket Analysis](#market-basket-analysis)
-- [Cohort Retention Analysis](#cohort-retention-analysis)
+# Introduction
 
-# Data Dictionary
-
-| Variable Name | Role | Type | Description |
-|---------------|------|------|-------------|
-| InvoiceNo | ID | Categorical | A 6-digit integral number uniquely assigned to each transaction. If this code starts with letter 'c', it indicates a cancellation |
-| StockCode | ID | Categorical | A 5-digit integral number uniquely assigned to each distinct product |
-| Description | Feature | Categorical | Product name |
-| Quantity | Feature | Integer | The quantities of each product (item) per transaction |
-| InvoiceDate | Feature | Date | The day and time when each transaction was generated |
-| UnitPrice | Feature | Continuous | Product price per unit |
-| CustomerID | Feature | Categorical | A 5-digit integral number uniquely assigned to each customer |
-| Country | Feature | Categorical | The name of the country where each customer resides |
+This project uses [online retail data](https://archive.ics.uci.edu/dataset/352/online+retail) from the UCI Machine Learning Repository.The dataset contains transactional data from a UK-based online retail company. <br> 
+For more detail on the dataset, you can visit the website or check the [data-dictionary](./docs/data_dictionary.md). You can manually download the data or just run the first two cells in the [EDA notebook](./notebooks/eda.ipynb) and you will see a folder named "data" in your working directory.  
 
 The three critical questions that every retailer should ask to determine their strategic direction and profitability: 
 
@@ -572,6 +565,7 @@ rules
 - We want to find connections that are strong and unexpected, not just frequent.
 - So Lift gives us more signal than just using Confidence. And we find very interesting relations as above..
 
+---
 
 # Cohort Retention Analysis
 
