@@ -4,13 +4,48 @@
 Understanding customer behavior is crucial for business success in online retail or e-commerce. This project aims to uncover hidden patterns in customer transactions, identify distinct customer segments, and provide data-driven recommendations for improving customer retention and maximizing revenue. <br>
 This project uses [online retail data](https://archive.ics.uci.edu/dataset/352/online+retail) from the UCI Machine Learning Repository.The dataset contains transactional data from a UK-based online retail company. <br> 
 
+## Getting Started
+
+1. Clone repository
+
+    ```
+    git clone https://github.com/tatv047/online-retail-data-analysis.git
+    cd online-retail-data-analysis
+    ```
+
+2. Create a virtual environment
+
+    ```
+    python -m venv venv
+    ```
+
+3. Activate the virtual environment
+    - On Windows:
+    ```
+    venv\Scripts\activate
+    ```
+    - On macOS/Linux:
+    ```
+    source venv/bin/activate
+    ```
+
+4. Install dependencies
+    ```
+    pip install -r requirements.txt
+    ```
+
+5. Run the notebooks
+    ```
+    jupyter eda.ipynb
+    ```
+
 # Table of Contents
 
 - [Data Dictionary](#data-dictionary)
 - [EDA & Data Cleaning](#eda--data-cleaning)
 - [Customer Segmentation](#customer-segmentation)
 - [Market Basket Analysis](#market-basket-analysis)
-- [Cohort and Retention Analysis](#cohort-and-retention-analysis)
+- [Cohort Retention Analysis](#cohort-retention-analysis)
 
 # Data Dictionary
 
@@ -538,7 +573,38 @@ rules
 - So Lift gives us more signal than just using Confidence. And we find very interesting relations as above..
 
 
-## Cohort and Retention Analysis
+# Cohort Retention Analysis
+
+<div style="text-align: center;">
+  <img src="./docs/imgs/img31.png" alt="Association Rules Flow" width="80%"/>
+</div>
+
+- The rows represent customer cohorts,defined by **first month** they made a purchase (e.g., `2010-12`, `2011-01`, etc.).
+- The columns represent the number of months since their first purchase (`Cohort Index` 0 to 12).
+- And the values are the % of the original cohort that returned to make a purchase that month.
+- There are few insights that you can draw from it:
+  - For almost all cohorts, there's a **sharp drop after month 0**.For example: the `2011-01` cohort drops from `100%` to `22%` in month 1. A possible reason could be that customers are not being engaged effectively after their first purchase. There's a retention gap.
+  -  Cohort `2010-12` stands out — it retains **\~36-50%** of its customers across several months. Possible reasons could be better offers, seasonality (December = holidays), or more loyal segment acquired.
+  - Recent cohorts (e.g. `2011-09` to `2011-12`) have very **low retention** after month 1 or 2. Marketing or product strategies may have changed for the worse, or seasonal customers were acquired.
+  - Most cohorts reach near-zero retention by month 6–9. This shows high churn which may mean:
+    - Customers don’t see long-term value
+    - Lack of subscription/loyalty programs
+    - One-off purchases dominate
+
+### Business Actions to Consider:
+
+| Insight                            | Action                                                                           |
+| ---------------------------------- | -------------------------------------------------------------------------------- |
+| Low retention after first purchase | Implement onboarding email series, discounts on second purchase, loyalty rewards |
+| Strong holiday cohort (2010-12)    | Analyze what worked then — repeat successful campaigns                           |
+| High churn by 3–6 months           | Introduce reactivation campaigns before months 2–3                               |
+| Certain months worse than others   | Align this with marketing spend, acquisition channel, and customer type          |
+
+ "Our cohort retention analysis shows a significant drop in customer engagement after the first month, with most customers churning by month 3. However, certain cohorts like Dec 2010 show stronger long-term retention, indicating that specific periods or campaigns may be more effective. This highlights the need to improve post-purchase engagement and build loyalty pathways early in the customer lifecycle."
+
+---
+
+
 
 
 
